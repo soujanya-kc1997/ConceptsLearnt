@@ -1,0 +1,28 @@
+ThreadPooling is used to handle the high volume of concurrent asynchronous tasks(small tasks).In general without the ThreadPooling, For each task, an object is created and then that object is destroyed. Here the server wastes time creating and destroying the objects even for the small tasks. Here comes the ThreadPooling. Threads are reused here.
+For Example, ThreadPooling is used to handle push notifications. Where the notifications sent from One server need not check if the task is completed or not. Only the received receipt (accepted) is enough.
+
+Few parameters we need to know in ThreadPooling are as follows:
+   1)CorePoolCount.
+   2)MaximumPoolCount.
+   3)KeepAliveTime.
+   4)Queue.
+   
+CorePoolCount: 
+    CorePoolCount is the count of threads that would be alive once the pool is created.
+MaximumPoolCount: 
+    MaximumPoolCount is the maximum count of threads that can be created on-demand.
+KeepAliveTime: 
+    KeepAliveTime is the maximum time the threads other than CorePoolCount Threads would be alive (i.e) the threads created with the MaximumPoolCount. 
+
+Queues:
+    Queues in thread pooling are used to hold the tasks when a further thread cannot be created (i.e) reaching the MaximumPoolSize or the CorePoolSize depending upon the scenario(discussed in note). 
+    Queues in the thread pool can be categorized as follows
+       1)Bounded Queue.
+       2)Unbounded Queue.
+BoundedQueue:
+     The queue that is constructed using static structure [size fixed] is called a bounded queue. These bounded queues have size limitations (i.e) once the queue is full then the rest of the new tasks will be rejected.
+UnboundedQueue:
+      The queues that are constructed using dynamic structure [variable length on-demand based] is called UnboundedQueue. These unbounded queues have no size limitation. The size can be expanded as the new tasks arrive.
+
+Note: When we use Unbounded Queues the MaximumPoolCount will be neglected (i.e)Once the CorePoolCount is reached the new tasks will be pushed to the queue and the threads created of the size CorePoolCount will be reused for all the tasks that are added to the queue. 
+
